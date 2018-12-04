@@ -25,10 +25,10 @@ def push_sample():
 
 @app.route("/callback", methods=["POST"])
 def callback():
-    food = Foodstuff()
     signature = request.headers["X-Line-Signature"]
-    # body = request.get_data(as_text=True)
-    body = food.get_food()
+    body = request.get_data(as_text=True)
+    # food = Foodstuff()
+    # body = food.get_food()
     app.logger.info("Request body: " + body)
 
     try:
