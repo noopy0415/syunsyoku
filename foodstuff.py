@@ -1,3 +1,4 @@
+from random import choice
 import urllib.request, urllib.error
 from bs4 import BeautifulSoup
 
@@ -42,6 +43,11 @@ class Foodstuff(object):
     def get_marine(self):
         marine_list = Foodstuff().get_foods("marine/")
         return marine_list
+
+    def get_food(self):
+        food = choice(Foodstuff().get_foods("marine/"))
+
+        return food
 
 
 if __name__ == "__main__":
