@@ -1,9 +1,12 @@
+
 import os
 
 from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
+
+from foodstuff import Foodstuff
 
 app = Flask(__name__)
 
@@ -22,8 +25,10 @@ def push_sample():
 
 @app.route("/callback", methods=["POST"])
 def callback():
+    food = Foodstuff()
     signature = request.headers["X-Line-Signature"]
-    body = request.get_data(as_text=True)
+    # body = request.get_data(as_text=True)
+    body = food.get_food()
     app.logger.info("Request body: " + body)
 
     try:
