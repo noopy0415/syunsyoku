@@ -9,6 +9,9 @@ verify_ssl = true
 request = "*"
 flask = "*"
 line-bot-sdk = "*"
+beautifulsoup4 = "*"
+bs4 = "*"
+beautifulsoup = "*"
 
 [requires]
 python_version = "3.7"
