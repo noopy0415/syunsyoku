@@ -28,7 +28,7 @@ def callback():
     signature = request.headers["X-Line-Signature"]
     # body = request.get_data(as_text=True)
     body = Foodstuff().get_food()
-    app.logger.info("Request body: " + body)
+    app.logger.info(f"Request body: {body}"")
 
     try:
         handler.handle(body, signature)
