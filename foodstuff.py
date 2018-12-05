@@ -1,6 +1,7 @@
 from random import choice
 import urllib.request, urllib.error
 from bs4 import BeautifulSoup
+from random import choice
 
 
 class Foodstuff(object):
@@ -45,14 +46,12 @@ class Foodstuff(object):
         return marine_list
 
     def get_food(self):
-        food = choice(Foodstuff().get_foods("marine/"))
-
-        return food
-
+        foods = Foodstuff().get_foods()
+        return choice(foods)
 
 if __name__ == "__main__":
     food = Foodstuff()
 
     print(food.get_foods())
 
-    print(len(food.get_foods()))
+    print(food.get_food())
