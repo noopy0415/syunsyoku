@@ -42,7 +42,7 @@ def callback():
 def handle_message(event):
     text = "おはよう"
     line_bot_api.reply_message(event.reply_token,
-                               TextSendMessage(text=text.message.text))
+                               TextSendMessage(text=text))
     # line_bot_api.reply_message(event.reply_token,
     #                            TextSendMessage(text=event.message.text))
 
