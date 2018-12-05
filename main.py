@@ -26,9 +26,9 @@ def push_sample():
 @app.route("/callback", methods=["POST"])
 def callback():
     signature = request.headers["X-Line-Signature"]
-    # body = request.get_data(as_text=True)
-    body = Foodstuff().get_food()
-    app.logger.info(f"Request body: {body}")
+    body = request.get_data(as_text=True)
+    # body = Foodstuff().get_food()
+    app.logger.info("Request body:" + body)
 
     try:
         handler.handle(body, signature)
@@ -40,8 +40,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    text = "おはよう"
     line_bot_api.reply_message(event.reply_token,
-                               TextSendMessage(text=event.message.text))
+                               TextSendMessage(text=text.message.text))
+    # line_bot_api.reply_message(event.reply_token,
+    #                            TextSendMessage(text=event.message.text))
 
 
 if __name__ == "__main__":
