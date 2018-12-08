@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 class Foodstuff(object):
     def get_foods(self, category="all", month_=12):
-        # month_ = str(datetime.date.today().month)
+        month_ = str(datetime.date.today().month)
 
         url = f"https://k52.org/syokuzai/{category}/{month_}"
 
@@ -24,9 +24,10 @@ class Foodstuff(object):
             except:
                 pass
 
-        foods_list.remove("食材名")
+        foods_list = [food for food in foods_list if food != "食材名"]
 
-        if None in foods_list: foods_list.remove(None)
+        if None in foods_list:
+            foods_list.remove(None)
 
         return foods_list
 
@@ -55,4 +56,4 @@ if __name__ == "__main__":
 
     # print(food.get_foods())
 
-    print(food.get_food())
+    print(food.get_foods())
