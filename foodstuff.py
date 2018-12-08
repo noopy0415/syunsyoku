@@ -6,7 +6,7 @@ from random import choice
 
 class Foodstuff(object):
     def get_foods(self, category="all"):
-        month_ = datetime.date.today().month
+        month_ = date.today().month
 
         url = f"https://k52.org/syokuzai/{category}/{month_}"
 
@@ -25,7 +25,7 @@ class Foodstuff(object):
             except:
                 pass
 
-        # foods_list.remove("食材名")
+        foods_list.remove("食材名")
 
         if None in foods_list: foods_list.remove(None)
 
