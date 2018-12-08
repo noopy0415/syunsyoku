@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 class Foodstuff(object):
     def get_foods(self, category="all", month_=12):
-        month_ = str(datetime.date.today().month)
+        # month_ = str(datetime.date.today().month)
 
         url = f"https://k52.org/syokuzai/{category}/{month_}"
 
@@ -56,4 +56,4 @@ if __name__ == "__main__":
 
     # print(food.get_foods())
 
-    print(food.get_foods())
+    print(food.get_food())
