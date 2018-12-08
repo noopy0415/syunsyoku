@@ -52,7 +52,7 @@ def handle_message(event):
         notes.append([CarouselColumn(thumbnail_image_url=recipe["image"],
                                      title=recipe["recipe"],
                                      actions=[
-                                         {"type": "message", "label": "サイトURL", recipe["link"]}]), ])
+                                         {"type": "message", "label": "サイトURL", "text": recipe["link"]}]), ])
 
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes),
