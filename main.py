@@ -27,7 +27,6 @@ def push_sample():
 def callback():
     signature = request.headers["X-Line-Signature"]
     body = request.get_data(as_text=True)
-    # body = Foodstuff().get_food()
     app.logger.info("Request body:" + body)
 
     try:
@@ -41,10 +40,11 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = Foodstuff().get_food()
-    line_bot_api.reply_message(event.reply_token,
-                               TextSendMessage(text=text))
+    # ここのTextSendMessageの引数が送信されるメッセージだった。
     # line_bot_api.reply_message(event.reply_token,
     #                            TextSendMessage(text=event.message.text))
+    line_bot_api.reply_message(event.reply_token,
+                               TextSendMessage(text=text))
 
 
 if __name__ == "__main__":
