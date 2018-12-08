@@ -4,7 +4,11 @@ import os
 from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
-from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
+from linebot.models import (MessageEvent,
+                            TextMessage,
+                            TextSendMessage,
+                            TemplateSendMessage,
+                            CarouselColumn, CarouselTemplate)
 
 from foodstuff import Foodstuff
 from recipe import Recipe
@@ -40,12 +44,21 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    res = Recipe.get_recipes(food=Foodstuff().get_food())
-    # ここのTextSendMessageの引数が送信されるメッセージだった。
-    # line_bot_api.reply_message(event.reply_token,
-    #                            TextSendMessage(text=event.message.text))
-    line_bot_api.reply_message(event.reply_token,
-                               TextSendMessage(text=res))
+    recipes = Recipe().get_recipes(Foodstuff().get_food())
+
+    notes = []
+
+    for recipe in recipes:
+        notes.append([CarouselColumn(thumbnail_image_url=recipe["image"],
+                                     title=recipe["recipe"],
+                                     actions=[
+                                         {"type": "message", "label": "サイトURL", recipe["link"]}]), ])
+
+    messages = TemplateSendMessage(alt_text='template',
+                                   template=CarouselTemplate(columns=notes),
+                                   )
+
+    line_bot_api.reply_message(event.reply_token, messages=messages)
 
 
 if __name__ == "__main__":
