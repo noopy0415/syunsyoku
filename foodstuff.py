@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 
 
 class Foodstuff(object):
-    def get_foods(self, category="all"):
-        month_ = str(datetime.date.today().month)
+    def get_foods(self, category="all", month_=12):
+        # month_ = str(datetime.date.today().month)
 
         url = f"https://k52.org/syokuzai/{category}/{month_}"
 
