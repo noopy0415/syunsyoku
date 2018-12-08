@@ -5,8 +5,10 @@ from random import choice
 
 
 class Foodstuff(object):
-    def get_foods(self, url=""):
-        url = "https://k52.org/syokuzai/" + url
+    def get_foods(self, category="all"):
+        month_ = datetime.date.today().month
+
+        url = f"https://k52.org/syokuzai/{category}/{month_}"
 
         html = urllib.request.urlopen(url)
 
@@ -23,26 +25,26 @@ class Foodstuff(object):
             except:
                 pass
 
-        foods_list.remove("食材名")
+        # foods_list.remove("食材名")
 
         if None in foods_list: foods_list.remove(None)
 
         return foods_list
 
     def get_vegetable(self):
-        vegetable_list = Foodstuff().get_foods("vegetable/")
+        vegetable_list = Foodstuff().get_foods("vegetable")
         return vegetable_list
 
     def get_fruits(self):
-        fruits_list = Foodstuff().get_foods("fruit/")
+        fruits_list = Foodstuff().get_foods("fruit")
         return fruits_list
 
     def get_fish(self):
-        fish_list = Foodstuff().get_foods("fish/")
+        fish_list = Foodstuff().get_foods("fish")
         return fish_list
 
     def get_marine(self):
-        marine_list = Foodstuff().get_foods("marine/")
+        marine_list = Foodstuff().get_foods("marine")
         return marine_list
 
     def get_food(self):
@@ -52,6 +54,6 @@ class Foodstuff(object):
 if __name__ == "__main__":
     food = Foodstuff()
 
-    print(food.get_foods())
+    # print(food.get_foods())
 
     print(food.get_food())
