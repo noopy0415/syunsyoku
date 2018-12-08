@@ -7,6 +7,7 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
 
 from foodstuff import Foodstuff
+from recipe import Recipe
 
 app = Flask(__name__)
 
@@ -39,12 +40,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    text = Foodstuff().get_food()
+    res = Recipe.get_recipes(food=Foodstuff().get_food())
     # ここのTextSendMessageの引数が送信されるメッセージだった。
     # line_bot_api.reply_message(event.reply_token,
     #                            TextSendMessage(text=event.message.text))
     line_bot_api.reply_message(event.reply_token,
-                               TextSendMessage(text=text))
+                               TextSendMessage(text=res))
 
 
 if __name__ == "__main__":
