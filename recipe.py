@@ -22,7 +22,7 @@ class Recipe(object):
 
             try:
                 recipe = tag.find_all("a")[1].text
-                link = tag.find_all("a")[0].get("href")
+                link = f'https://cookpad.com/{tag.find_all("a")[0].get("href")}'
                 image = tag.img["src"]
                 recipes.append({"recipe": recipe, "link": link, "image": image})
 

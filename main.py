@@ -54,21 +54,9 @@ def handle_message(event):
                                 actions=[
                                     {"type": "message", "label": "サイトURL", "text": recipe["link"]}])]
 
-        # CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle03.jpg",
-        #                title="ReleaseNote】創作中の活動を報告する機能を追加しました。",
-        #                text="創作中や考え中の時点の活動を共有できる機能を追加しました。",
-        #                actions=[
-        #                    {"type": "message", "label": "サイトURL", "text": "https://renttle.jp/notes/kota/6"}]),
-        #
-        # CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle04.jpg",
-        #                title="【ReleaseNote】タグ機能を追加しました。",
-        #                text="「イベントを作成」「記事を投稿」「本を登録」にタグ機能を追加しました。",
-        #                actions=[
-        #                    {"type": "message", "label": "サイトURL", "text": "https://renttle.jp/notes/kota/5"}])]
-
     messages = TemplateSendMessage(alt_text='template',
-                                   template=CarouselTemplate(columns=notes),
-                                   )
+                                   template=CarouselTemplate(columns=notes), )
+
 
     line_bot_api.reply_message(event.reply_token, messages=messages)
 
