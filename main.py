@@ -4,10 +4,8 @@ import os
 from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
-from linebot.models import (MessageEvent,
-                            TextMessage,
-                            TextSendMessage,
-                            TemplateSendMessage,
+from linebot.models import (MessageEvent, TextMessage,
+                            TextSendMessage, TemplateSendMessage,
                             CarouselColumn, CarouselTemplate)
 
 from foodstuff import Foodstuff
@@ -49,10 +47,23 @@ def handle_message(event):
     notes = []
 
     for recipe in recipes:
-        notes.append([CarouselColumn(thumbnail_image_url=recipe["image"],
-                                     title=recipe["recipe"],
-                                     actions=[
-                                         {"type": "message", "label": "サイトURL", "text": recipe["link"]}]), ])
+        notes = [CarouselColumn(thumbnail_image_url=recipe["image"],
+                                title=recipe["recipe"],
+                                text="text",
+                                actions=[
+                                    {"type": "message", "label": "サイトURL", "text": recipe["link"]}])]
+
+        # CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle03.jpg",
+        #                title="ReleaseNote】創作中の活動を報告する機能を追加しました。",
+        #                text="創作中や考え中の時点の活動を共有できる機能を追加しました。",
+        #                actions=[
+        #                    {"type": "message", "label": "サイトURL", "text": "https://renttle.jp/notes/kota/6"}]),
+        #
+        # CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle04.jpg",
+        #                title="【ReleaseNote】タグ機能を追加しました。",
+        #                text="「イベントを作成」「記事を投稿」「本を登録」にタグ機能を追加しました。",
+        #                actions=[
+        #                    {"type": "message", "label": "サイトURL", "text": "https://renttle.jp/notes/kota/5"}])]
 
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes),
