@@ -1,7 +1,6 @@
 from random import choice
 import urllib.request, urllib.error
 from bs4 import BeautifulSoup
-from random import choice
 
 
 class Foodstuff(object):
