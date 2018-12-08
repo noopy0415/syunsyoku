@@ -42,14 +42,15 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    recipes = Recipe().get_recipes(Foodstuff().get_food())
+    food = Foodstuff().get_food()
+    recipes = Recipe().get_recipes(food)
 
     notes = []
 
     for recipe in recipes:
         notes = [CarouselColumn(thumbnail_image_url=recipe["image"],
-                                title=recipe["recipe"],
-                                text="text",
+                                title=f"{food}のレシピ",
+                                text=recipe["recipe"],
                                 actions=[
                                     {"type": "message", "label": "サイトURL", "text": recipe["link"]}])]
 
