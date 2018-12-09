@@ -1,4 +1,3 @@
-
 import os
 
 from flask import Flask, request, abort
@@ -51,29 +50,26 @@ def handle_message(event):
                             actions=[
                                 URIAction(
                                     label='Go!!',
-                                    uri=recipes[0]["link"]
-                                )
-                            ]),
-
+                                    uri=recipes[0]["link"])]),
              CarouselColumn(thumbnail_image_url=recipes[1]["image"],
                             title=f"{food}のレシピ",
                             text=recipes[1]["recipe"],
                             actions=[
-                                {"type": "message",
-                                 "label": "サイトURL",
-                                 "text": recipes[1]["link"]}]),
-
+                                URIAction(
+                                    label='Go!!',
+                                    uri=recipes[1]["link"])]),
              CarouselColumn(thumbnail_image_url=recipes[2]["image"],
                             title=f"{food}のレシピ",
                             text=recipes[2]["recipe"],
                             actions=[
-                                {"type": "message", "label": "サイトURL", "text": recipes[2]["link"]}])]
+                                URIAction(
+                                    label='Go!!',
+                                    uri=recipes[2]["link"])])]
 
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes), )
 
     line_bot_api.reply_message(event.reply_token, messages=messages)
-
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
