@@ -6,7 +6,7 @@ from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage,
                             TextSendMessage, TemplateSendMessage,
-                            CarouselColumn, CarouselTemplate)
+                            CarouselColumn, CarouselTemplate, URIAction)
 
 from foodstuff import Foodstuff
 from recipe import Recipe
@@ -45,23 +45,23 @@ def handle_message(event):
     food = Foodstuff().get_food()
     recipes = Recipe().get_recipes(food)
 
-    # notes = [CarouselColumn(thumbnail_image_url=recipe["image"],
-    #                         title=f"{food}のレシピ",
-    #                         text=recipe["recipe"],
-    #                         actions=[
-    #                             {"type": "message", "label": "サイトURL2", "text": recipe["link"]}])]
-
     notes = [CarouselColumn(thumbnail_image_url=recipes[0]["image"],
                             title=f"{food}のレシピ",
                             text=recipes[0]["recipe"],
                             actions=[
-                                {"type": "message", "label": "サイトURL", "text": recipes[0]["link"]}]),
+                                URIAction(
+                                    label='uri2',
+                                    uri=recipes[0]["link"]
+                                )
+                            ]),
 
              CarouselColumn(thumbnail_image_url=recipes[1]["image"],
                             title=f"{food}のレシピ",
                             text=recipes[1]["recipe"],
                             actions=[
-                                {"type": "message", "label": "サイトURL", "text": recipes[1]["link"]}]),
+                                {"type": "message",
+                                 "label": "サイトURL",
+                                 "text": recipes[1]["link"]}]),
 
              CarouselColumn(thumbnail_image_url=recipes[2]["image"],
                             title=f"{food}のレシピ",
@@ -71,7 +71,6 @@ def handle_message(event):
 
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes), )
-    # messages = TextSendMessage(text=f'{food}のレシピ\n{recipes["link"]}')
 
     line_bot_api.reply_message(event.reply_token, messages=messages)
 
