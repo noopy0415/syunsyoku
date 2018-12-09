@@ -41,29 +41,36 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    food = Foodstuff().get_food()
-    recipes = Recipe().get_recipes(food)
+    if event.message.text == "リクエスト":
+        food = Foodstuff().get_food()
+        recipes = Recipe().get_recipes(food)
 
-    notes = [CarouselColumn(thumbnail_image_url=recipes[0]["image"],
-                            title=recipes[0]["recipe"],
-                            text=f"{food}のレシピ",
-                            actions=[URIAction(label='Go!!',
-                                               uri=recipes[0]["link"])]),
-             CarouselColumn(thumbnail_image_url=recipes[1]["image"],
-                            title=recipes[1]["recipe"],
-                            text=f"{food}のレシピ",
-                            actions=[URIAction(label='Go!!',
-                                               uri=recipes[1]["link"])]),
-             CarouselColumn(thumbnail_image_url=recipes[2]["image"],
-                            title=recipes[2]["recipe"],
-                            text=f"{food}のレシピ",
-                            actions=[URIAction(label='Go!!',
-                                               uri=recipes[2]["link"])])]
+        notes = [CarouselColumn(thumbnail_image_url=recipes[0]["image"],
+                                title=recipes[0]["recipe"],
+                                text=f"{food}のレシピ",
+                                actions=[URIAction(label='Go!!',
+                                                   uri=recipes[0]["link"])]),
+                 CarouselColumn(thumbnail_image_url=recipes[1]["image"],
+                                title=recipes[1]["recipe"],
+                                text=f"{food}のレシピ",
+                                actions=[URIAction(label='Go!!',
+                                                   uri=recipes[1]["link"])]),
+                 CarouselColumn(thumbnail_image_url=recipes[2]["image"],
+                                title=recipes[2]["recipe"],
+                                text=f"{food}のレシピ",
+                                actions=[URIAction(label='Go!!',
+                                                   uri=recipes[2]["link"])])]
 
-    messages = TemplateSendMessage(alt_text='template',
-                                   template=CarouselTemplate(columns=notes), )
+        messages = TemplateSendMessage(alt_text='template',
+                                       template=CarouselTemplate(columns=notes), )
 
-    line_bot_api.reply_message(event.reply_token, messages=messages)
+        line_bot_api.reply_message(event.reply_token, messages=messages)
+
+    if event.message.text == "How To":
+        msg == '''｢リクエスト｣と言うとレシピをお送りします'''
+        line_bot_api.reply_message(event.reply_token,
+                                   TextSendMessage(text=msg))
+
 
 
 if __name__ == "__main__":
