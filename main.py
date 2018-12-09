@@ -66,8 +66,7 @@ def handle_message(event):
              CarouselColumn(thumbnail_image_url=recipes[2]["image"],
                             title=f"{food}のレシピ",
                             text=recipes[2]["recipe"],
-                            actions=[
-                                {"type": "message", "label": "サイトURL", "text": recipes[2]["link"]}])]
+                            )]
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes), )
     # messages = TextSendMessage(text=f'{food}のレシピ\n{recipes["link"]}')
