@@ -63,11 +63,11 @@ def handle_message(event):
                             actions=[
                                 {"type": "message", "label": "サイトURL", "text": recipes[1]["link"]}]),
 
-             CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle04.jpg",
-                            title="【ReleaseNote】タグ機能を追加しました。",
-                            text="「イベントを作成」「記事を投稿」「本を登録」にタグ機能を追加しました。",
+             CarouselColumn(thumbnail_image_url=ecipes[2]["image"],
+                            title=f"{food}のレシピ",
+                            text=recipes[2]["recipe"],
                             actions=[
-                                {"type": "message", "label": "サイトURL", "text": "https://renttle.jp/notes/kota/5"}])]
+                                {"type": "message", "label": "サイトURL", "text": recipes[2]["link"]}])]
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes), )
     # messages = TextSendMessage(text=f'{food}のレシピ\n{recipes["link"]}')
