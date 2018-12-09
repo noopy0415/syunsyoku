@@ -43,7 +43,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     food = Foodstuff().get_food()
-    recipe = Recipe().get_recipes(food).pop(0)
+    recipes = Recipe().get_recipes(food)
 
     # notes = [CarouselColumn(thumbnail_image_url=recipe["image"],
     #                         title=f"{food}のレシピ",
@@ -51,11 +51,11 @@ def handle_message(event):
     #                         actions=[
     #                             {"type": "message", "label": "サイトURL2", "text": recipe["link"]}])]
 
-    notes = [CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle02.jpg",
-                            title="【ReleaseNote】トークルームを実装しました。",
-                            text="creation(創作中・考え中の何かしらのモノ・コト)に関して、意見を聞けるようにトークルーム機能を追加しました。",
+    notes = [CarouselColumn(thumbnail_image_url=recipes[0]["image"],
+                            title=f"{food}のレシピ",
+                            text=recipes[0]["recipe"],
                             actions=[
-                                {"type": "message", "label": "サイトURL", "text": "https://renttle.jp/notes/kota/7"}]),
+                                {"type": "message", "label": "サイトURL", "text": recipes[0]["link"]}]),
 
              CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle03.jpg",
                             title="ReleaseNote】創作中の活動を報告する機能を追加しました。",
