@@ -46,11 +46,11 @@ def handle_message(event):
     recipes = Recipe().get_recipes(food)
 
     notes = [CarouselColumn(thumbnail_image_url=recipes[0]["image"],
-                            title=f"{food}のレシピ",
-                            text=recipes[0]["recipe"],
+                            title=recipes[0]["recipe"],
+                            text=f"{food}のレシピ",
                             actions=[
                                 URIAction(
-                                    label='uri2',
+                                    label='Go!!',
                                     uri=recipes[0]["link"]
                                 )
                             ]),
