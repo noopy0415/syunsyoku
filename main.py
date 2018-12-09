@@ -63,7 +63,7 @@ def handle_message(event):
                             actions=[
                                 {"type": "message", "label": "サイトURL", "text": recipes[1]["link"]}]),
 
-             CarouselColumn(thumbnail_image_url=ecipes[2]["image"],
+             CarouselColumn(thumbnail_image_url=recipes[2]["image"],
                             title=f"{food}のレシピ",
                             text=recipes[2]["recipe"],
                             actions=[
