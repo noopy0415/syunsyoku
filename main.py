@@ -57,11 +57,11 @@ def handle_message(event):
                             actions=[
                                 {"type": "message", "label": "サイトURL", "text": recipes[0]["link"]}]),
 
-             CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle03.jpg",
-                            title="ReleaseNote】創作中の活動を報告する機能を追加しました。",
-                            text="創作中や考え中の時点の活動を共有できる機能を追加しました。",
+             CarouselColumn(thumbnail_image_url=recipes[1]["image"],
+                            title=f"{food}のレシピ",
+                            text=recipes[1]["recipe"],
                             actions=[
-                                {"type": "message", "label": "サイトURL", "text": "https://renttle.jp/notes/kota/6"}]),
+                                {"type": "message", "label": "サイトURL", "text": recipes[1]["link"]}]),
 
              CarouselColumn(thumbnail_image_url="https://renttle.jp/static/img/renttle04.jpg",
                             title="【ReleaseNote】タグ機能を追加しました。",
