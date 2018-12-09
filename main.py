@@ -43,16 +43,19 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     food = Foodstuff().get_food()
-    recipes = Recipe().get_recipes(food)
+    recipe = Recipe().get_recipes(food).pop(0)
 
-    notes = []
-
-    for recipe in recipes:
-        notes = [CarouselColumn(thumbnail_image_url=recipe["image"],
-                                title=f"{food}のレシピ",
-                                text=recipe["recipe"],
-                                actions=[
-                                    {"type": "message", "label": "サイトURL2", "text": recipe["link"]}])]
+    notes = {[CarouselColumn(thumbnail_image_url=recipe["image"],
+                             title=f"{food}のレシピ",
+                             text=recipe["recipe"],
+                             actions=[
+                                 {"type": "message", "label": "サイトURL2", "text": recipe["link"]}])],
+             [CarouselColumn(thumbnail_image_url=recipe["image"],
+                             title=f"{food}のレシピ",
+                             text=recipe["recipe"],
+                             actions=[
+                                 {"type": "message", "label": "サイトURL2", "text": recipe["link"]}])]
+             }
 
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes), )
