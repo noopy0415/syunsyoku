@@ -43,6 +43,7 @@ def callback():
 def handle_message(event):
     if event.message.text == "リクエスト":
         food = Foodstuff().get_food()
+        print(food)
         recipes = Recipe().get_recipes(food)
 
         notes = [CarouselColumn(thumbnail_image_url=recipes[0]["image"],
