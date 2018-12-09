@@ -52,7 +52,8 @@ def handle_message(event):
                                 title=f"{food}のレシピ",
                                 text=recipe["recipe"],
                                 actions=[
-                                    {"type": "message", "label": "サイトURL", "uri": recipe["link"]}])]
+                                    {"type": "message", "label": "サイトURL", "text": recipe["link"]},
+                                    {"type": "message", "label": "サイトURL", "text": recipe["link"]}])]
 
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes), )
