@@ -54,9 +54,9 @@ def handle_message(event):
                                 actions=[
                                     {"type": "message", "label": "サイトURL", "text": recipe["link"]}])]
 
-    # messages = TemplateSendMessage(alt_text='template',
-    #                                template=CarouselTemplate(columns=notes), )
-    messages = TextSendMessage(text=f'{food}のレシピ\n{recipe["link"]}')
+    messages = TemplateSendMessage(alt_text='template',
+                                   template=CarouselTemplate(columns=notes), )
+    # messages = TextSendMessage(text=f'{food}のレシピ\n{recipes["link"]}')
 
     line_bot_api.reply_message(event.reply_token, messages=messages)
 
