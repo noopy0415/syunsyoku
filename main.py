@@ -47,29 +47,24 @@ def handle_message(event):
     notes = [CarouselColumn(thumbnail_image_url=recipes[0]["image"],
                             title=recipes[0]["recipe"],
                             text=f"{food}のレシピ",
-                            actions=[
-                                URIAction(
-                                    label='Go!!',
-                                    uri=recipes[0]["link"])]),
+                            actions=[URIAction(label='Go!!',
+                                               uri=recipes[0]["link"])]),
              CarouselColumn(thumbnail_image_url=recipes[1]["image"],
-                            title=f"{food}のレシピ",
-                            text=recipes[1]["recipe"],
-                            actions=[
-                                URIAction(
-                                    label='Go!!',
-                                    uri=recipes[1]["link"])]),
+                            title=recipes[1]["recipe"],
+                            text=f"{food}のレシピ",
+                            actions=[URIAction(label='Go!!',
+                                               uri=recipes[1]["link"])]),
              CarouselColumn(thumbnail_image_url=recipes[2]["image"],
-                            title=f"{food}のレシピ",
-                            text=recipes[2]["recipe"],
-                            actions=[
-                                URIAction(
-                                    label='Go!!',
-                                    uri=recipes[2]["link"])])]
+                            title=recipes[2]["recipe"],
+                            text=f"{food}のレシピ",
+                            actions=[URIAction(label='Go!!',
+                                               uri=recipes[2]["link"])])]
 
     messages = TemplateSendMessage(alt_text='template',
                                    template=CarouselTemplate(columns=notes), )
 
     line_bot_api.reply_message(event.reply_token, messages=messages)
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
