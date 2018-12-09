@@ -28,8 +28,8 @@ class Recipe(object):
 
             except:
                 pass
-        print(len(recipes))
-        recipes = random.sample(recipes, 3)
+        if len(recipes) > 3:
+            recipes = random.sample(recipes, 3)
 
         return recipes
 
