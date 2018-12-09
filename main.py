@@ -67,7 +67,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, messages=messages)
 
     if event.message.text == "How To":
-        msg = '''｢リクエスト｣と言うとレシピをお送りします'''
+        msg = '''｢リクエスト｣と言ってもらえれば
+        今月のレシピを提案します'''
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=msg))
 
