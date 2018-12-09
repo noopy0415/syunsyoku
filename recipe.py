@@ -28,6 +28,7 @@ class Recipe(object):
 
             except:
                 pass
+        print(len(recipes))
         recipes = random.sample(recipes, 3)
 
         return recipes
