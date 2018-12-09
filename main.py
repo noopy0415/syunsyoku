@@ -66,8 +66,8 @@ def handle_message(event):
 
         line_bot_api.reply_message(event.reply_token, messages=messages)
 
-    if "食材:" in event.message.text:
-        food = event.message.text.replace("食材:", "")
+    if "食材" in event.message.text:
+        food = event.message.text.replace("食材", "")
         recipes = Recipe().get_recipes(food)
 
         notes = [CarouselColumn(thumbnail_image_url=recipes[0]["image"],
@@ -92,7 +92,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, messages=messages)
 
     if event.message.text == "How To":
-        msg = '''｢リクエスト｣と言ってもらえれば12月のレシピを提案します'''
+        msg = '''｢リクエスト｣と言ってもらえれば12月のレシピを提案します
+        ｢食材｣のあとに使用したい食材を入れるとそのレシピを提案します'''
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=msg))
 
