@@ -6,7 +6,7 @@ from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage,
                             TextSendMessage, TemplateSendMessage,
-                            CarouselColumn, CarouselTemplate)
+                            CarouselColumn, CarouselTemplate, URIAction)
 
 from foodstuff import Foodstuff
 from recipe import Recipe
@@ -55,13 +55,14 @@ def handle_message(event):
                             title=f"{food}のレシピ",
                             text=recipes[0]["recipe"],
                             actions=[
-                                {"type": "uri", "label": "サイトURL", "uri": recipes[0]["link"]}]),
+                                {"type": "message", "label": "サイトURL", "text": recipes[0]["link"]}]),
 
              CarouselColumn(thumbnail_image_url=recipes[1]["image"],
                             title=f"{food}のレシピ",
                             text=recipes[1]["recipe"],
                             actions=[
-                                {"type": "message", "label": "サイトURL", "text": recipes[1]["link"]}]),
+                                URIAction(label='uri2',
+                                          uri='http://example.com/2')]),
 
              CarouselColumn(thumbnail_image_url=recipes[2]["image"],
                             title=f"{food}のレシピ",
