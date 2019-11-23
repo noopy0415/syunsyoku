@@ -1,13 +1,14 @@
+import datetime
 from random import choice
 import urllib.request, urllib.error
 from bs4 import BeautifulSoup
 
 
 class Foodstuff(object):
-    def get_foods(self, category="all", month_=12):
+    def get_foods(self, category="all", month_= datetime.date.today().month):
         # month_ = str(datetime.date.today().month)
 
-        url = f"https://k52.org/syokuzai/{category}/{month_}"
+        url = f"https://k52.org/syokuzai/{category}/{datetime.date.today().month}"
 
         html = urllib.request.urlopen(url)
 
